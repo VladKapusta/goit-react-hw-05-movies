@@ -1,0 +1,17 @@
+.WrapperMovie {
+    display: flex;
+    margin-bottom: 15px;
+    border-bottom: 1px solid black;
+}
+.WrapperImg {
+    width: 340px;
+    margin-right: 30px;
+}
+.Ganre {
+    display: inline-block;
+    margin-right: 10px;
+}
+
+.Cast {
+    margin-right: 20px;
+}

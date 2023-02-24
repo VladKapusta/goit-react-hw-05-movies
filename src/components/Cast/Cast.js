@@ -1,8 +1,9 @@
 import { useState, useEffect } from 'react';
 import { fetchMovieType } from 'components/FetchMovies/fetchMovies';
 import { useParams } from 'react-router-dom';
+import noImage from '../images/NoImageFound.jpg';
 
-export const Cast = () => {
+const Cast = () => {
   const { id } = useParams();
   const [movieActors, setMovieActors] = useState(null);
 
@@ -18,7 +19,11 @@ export const Cast = () => {
             return (
               <li key={actor.id}>
                 <img
-                  src={`https://image.tmdb.org/t/p/w500/${actor.profile_path}`}
+                  src={
+                    actor.profile_path
+                      ? `https://image.tmdb.org/t/p/w500/${actor.profile_path}`
+                      : noImage
+                  }
                   alt={actor.original_name}
                   width="120"
                 />
@@ -29,3 +34,5 @@ export const Cast = () => {
     </>
   );
 };
+
+export default Cast;

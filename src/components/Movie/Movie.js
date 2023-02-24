@@ -1,8 +1,11 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, Suspense } from 'react';
 import { Link, Outlet, useParams } from 'react-router-dom';
 import { fetchMovie } from 'components/FetchMovies/fetchMovies';
+import noImage from '../images/NoImageFound.jpg';
 
-export const Movie = () => {
+import css from './Movie.module.css';
+
+const Movie = () => {
   const [movie, setMovie] = useState(null);
   const { id } = useParams();
 
@@ -13,10 +16,14 @@ export const Movie = () => {
   return (
     <>
       {movie && (
-        <div>
-          <div>
+        <div className={css.WrapperMovie}>
+          <div className={css.WrapperImg}>
             <img
-              src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
+              src={
+                movie.poster_path
+                  ? `https://image.tmdb.org/t/p/w500/${movie.poster_path}`
+                  : noImage
+              }
               alt={movie.title}
               width="240"
             />
@@ -28,15 +35,25 @@ export const Movie = () => {
             <p>{movie.overview}</p>
             <h3>Ganres</h3>
             {movie.genres.map(a => {
-              return <p key={a.id}>{a.name}</p>;
+              return (
+                <p key={a.id} className={css.Ganre}>
+                  {a.name}
+                </p>
+              );
             })}
           </div>
         </div>
       )}
-
-      <Link to="cast">Cast</Link>
+      <Link to="cast" className={css.Cast}>
+        Cast
+      </Link>
       <Link to="reviews">Reviews</Link>
-      <Outlet />
+
+      <Suspense>
+        <Outlet />
+      </Suspense>
     </>
   );
 };
+
+export default Movie;

@@ -1,0 +1,16 @@
+.Header {
+  background-color: rgb(32, 32, 151);
+}
+.Nav {
+  display: flex;
+  padding: 10px;
+}
+.NavLink {
+  padding: 10px;
+  margin-right: 20px;
+  color: white;
+}
+.NavLink:hover {
+  color: rgb(235, 94, 94);
+  transform: scaleX(1.1);
+}

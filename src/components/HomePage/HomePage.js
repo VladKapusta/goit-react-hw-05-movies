@@ -2,25 +2,36 @@ import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { fetchTrendingMovies } from 'components/FetchMovies/fetchMovies';
 
-export const HomePage = () => {
+const HomePage = () => {
   const [popularMovies, setPopularMovies] = useState(null);
 
   useEffect(() => {
     fetchTrendingMovies().then(r => setPopularMovies(r));
   }, []);
 
-  return (
-    <>
-      <ul>
-        {popularMovies &&
-          popularMovies.map(popular => {
+  if (popularMovies) {
+    return (
+      <>
+      <h1>Trending today</h1>
+        <ul>
+          {popularMovies.map(popular => {
             return (
               <li key={popular.id}>
-                <Link to={`movies/${popular.id}`}>{popular.title}</Link>
+                <Link to={`movies/${popular.id}`}>
+                  <img
+                    src={`https://image.tmdb.org/t/p/w500/${popular.poster_path}`}
+                    alt={popular.title}
+                    width='320'
+                  />
+                  <h3>{popular.title}</h3>
+                </Link>
               </li>
             );
           })}
-      </ul>
-    </>
-  );
+        </ul>
+      </>
+    );
+  }
 };
+
+export default HomePage;
