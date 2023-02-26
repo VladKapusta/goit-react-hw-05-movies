@@ -15,6 +15,7 @@ const Movie = () => {
 
   return (
     <>
+      {/* <Link to={'/movies'}>go back</Link> */}
       {movie && (
         <div className={css.WrapperMovie}>
           <div className={css.WrapperImg}>

@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import noImage from '../images/NoImageFound.jpg'
+import noImage from '../images/NoImageFound.jpg';
 
 const MoviesPage = () => {
   const [inputValue, setInputValue] = useState('');
@@ -50,17 +50,17 @@ const MoviesPage = () => {
           movies.map(movie => {
             return (
               <li key={movie.id}>
-                <Link to={`${movie.id}`}>
-                <img
+                <Link to={`${movie.id}`} state={{ form: nameMovie }}>
+                  <img
                     src={
                       movie.poster_path
                         ? `https://image.tmdb.org/t/p/w500/${movie.poster_path}`
                         : noImage
                     }
                     alt={movie.title}
-                    // className={s.poster}
                   />
-                  <h2>{movie.title}</h2></Link>
+                  <h2>{movie.title}</h2>
+                </Link>
               </li>
             );
           })}
