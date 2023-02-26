@@ -36,7 +36,21 @@ const MoviesPage = () => {
     if (nameMovie === '') {
       return;
     }
-    fetchMovieByName(nameMovie).then(({ results }) => setMovies(results));
+    fetchMovieByName(nameMovie).then(({ results }) => {
+      if (results.length === 0) {
+        toast.error(`No movies found for '${nameMovie}'`, {
+          position: 'top-right',
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: 'light',
+        });
+        return
+      }
+      setMovies(results)});
   }, [nameMovie]);
 
   return (
